@@ -1,0 +1,88 @@
+{
+  "name": "@hidden-warrior/arcium-core",
+  "version": "0.1.0",
+  "description": "Privacy-focused computation framework for Solana using Arcium technology",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "examples",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "arcium",
+    "solana",
+    "privacy",
+    "blockchain",
+    "cryptography",
+    "zero-knowledge",
+    "web3",
+    "gamefi",
+    "nft"
+  ],
+  "author": "Hidden Warrior Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hidden-warrior/arcium-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hidden-warrior/arcium-core/issues"
+  },
+  "homepage": "https://github.com/hidden-warrior/arcium-core#readme",
+  "dependencies": {
+    "@arcium-hq/client": "^0.2.0",
+    "@coral-xyz/anchor": "^0.31.1",
+    "@solana/web3.js": "^1.98.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "tsup": "^7.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.98.0",
+    "@coral-xyz/anchor": "^0.31.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.mjs",
+      "require": "./dist/utils/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.mjs",
+      "require": "./dist/types/index.js"
+    }
+  }
+}
