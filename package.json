@@ -1,6 +1,6 @@
 {
   "name": "arcium-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Privacy-focused computation framework for Solana using Arcium technology",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
