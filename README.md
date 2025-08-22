@@ -1,6 +1,6 @@
-# @hidden-warrior/arcium-core
+# arcium-core
 
-[![npm version](https://badge.fury.io/js/@hidden-warrior%2Farcium-core.svg)](https://badge.fury.io/js/@hidden-warrior%2Farcium-core)
+[![npm version](https://badge.fury.io/js/arcium-core.svg)](https://badge.fury.io/js/arcium-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-`@hidden-warrior/arcium-core` is a comprehensive TypeScript library that provides privacy-focused computation capabilities for Solana blockchain applications. It leverages Arcium's Multi-party Execution Environment (MXE) to enable secure, private computations while maintaining the decentralization benefits of blockchain technology.
+`arcium-core` is a comprehensive TypeScript library that provides privacy-focused computation capabilities for Solana blockchain applications. It leverages Arcium's Multi-party Execution Environment (MXE) to enable secure, private computations while maintaining the decentralization benefits of blockchain technology.
 
 ## Key Features
 
@@ -23,7 +23,7 @@
 ## Installation
 
 ```bash
-npm install @hidden-warrior/arcium-core
+npm install arcium-core
 # or
 yarn add @hidden-warrior/arcium-core
 # or
@@ -43,7 +43,7 @@ npm install @solana/web3.js @coral-xyz/anchor @arcium-hq/client
 ### Basic Usage
 
 ```typescript
-import { prepareArciumBattle } from '@hidden-warrior/arcium-core';
+import { prepareArciumBattle } from 'arcium-core';
 import { Program, AnchorProvider } from '@coral-xyz/anchor';
 
 // Initialize your Anchor program
@@ -77,7 +77,7 @@ import {
   generateKeyPair,
   encryptWarriorStats,
   generateNonce
-} from '@hidden-warrior/arcium-core';
+} from 'arcium-core';
 
 const keyPair = generateKeyPair();
 const nonce = generateNonce();
@@ -193,7 +193,7 @@ const result = await prepareArciumBattle(
 ### Manual Account Derivation
 
 ```typescript
-import { deriveArciumAccounts, generateComputationOffset } from '@hidden-warrior/arcium-core';
+import { deriveArciumAccounts, generateComputationOffset } from 'arcium-core';
 
 const computationOffset = generateComputationOffset();
 const accounts = deriveArciumAccounts(programId, computationOffset);
@@ -202,7 +202,7 @@ const accounts = deriveArciumAccounts(programId, computationOffset);
 ### Error Handling
 
 ```typescript
-import { ArciumError, ArciumErrorType } from '@hidden-warrior/arcium-core';
+import { ArciumError, ArciumErrorType } from 'arcium-core';
 
 try {
   const result = await prepareArciumBattle(program, provider, warriorStats, payerPubkey);
@@ -226,7 +226,7 @@ try {
 The package includes utilities for testing and simulation:
 
 ```typescript
-import { simulateArciumBattleResult } from '@hidden-warrior/arcium-core';
+import { simulateArciumBattleResult } from 'arcium-core';
 
 // Simulate battle result for testing
 const result = await simulateArciumBattleResult(85, 1000); // 1 second delay

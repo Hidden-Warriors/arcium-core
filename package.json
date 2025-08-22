@@ -1,5 +1,5 @@
 {
-  "name": "@hidden-warrior/arcium-core",
+  "name": "arcium-core",
   "version": "0.1.0",
   "description": "Privacy-focused computation framework for Solana using Arcium technology",
   "main": "dist/index.js",

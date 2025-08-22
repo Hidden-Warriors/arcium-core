@@ -12,7 +12,7 @@ import {
   WarriorStats,
   ArciumError,
   ArciumErrorType,
-} from '@hidden-warrior/arcium-core';
+} from 'arcium-core';
 import { Program, AnchorProvider } from '@coral-xyz/anchor';
 import { Connection, Keypair, PublicKey } from '@solana/web3.js';
 import { Wallet } from '@coral-xyz/anchor';
