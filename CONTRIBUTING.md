@@ -14,7 +14,7 @@ Thank you for your interest in contributing to @hidden-warrior/arcium-core! This
 
 1. **Fork and clone the repository**
    ```bash
-   git clone https://github.com/your-username/arcium-core.git
+   git clone https://github.com/Hidden-Warriors/arcium-core.git
    cd arcium-core
    ```
 
@@ -290,7 +290,7 @@ This project uses [Semantic Versioning](https://semver.org/):
 - 📧 **Email**: support@hiddenwarrior.fun
 - 💬 **Discord**: [Join our community](https://discord.gg/hiddenwarrior)
 - 📖 **Documentation**: [Full API docs](https://docs.hiddenwarrior.fun/arcium-core)
-- 🐛 **Issues**: [Report bugs](https://github.com/hidden-warrior/arcium-core/issues)
+- 🐛 **Issues**: [Report bugs](https://github.com/Hidden-Warriors/arcium-core/issues)
 
 ## License
 

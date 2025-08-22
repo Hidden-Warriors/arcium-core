@@ -39,12 +39,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hidden-warrior/arcium-core.git"
+    "url": "https://github.com/Hidden-Warriors/arcium-core.git"
   },
   "bugs": {
-    "url": "https://github.com/hidden-warrior/arcium-core/issues"
+    "url": "https://github.com/Hidden-Warriors/arcium-core/issues"
   },
-  "homepage": "https://github.com/hidden-warrior/arcium-core#readme",
+  "homepage": "https://github.com/Hidden-Warriors/arcium-core#readme",
   "dependencies": {
     "@arcium-hq/client": "^0.2.0",
     "@coral-xyz/anchor": "^0.31.1",

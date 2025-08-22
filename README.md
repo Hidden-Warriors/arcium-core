@@ -317,7 +317,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📧 **Email**: support@hiddenwarrior.fun
 - 💬 **Discord**: [Join our community](https://discord.gg/hiddenwarrior)
 - 📖 **Documentation**: [Full API docs](https://docs.hiddenwarrior.fun/arcium-core)
-- 🐛 **Issues**: [Report bugs](https://github.com/hidden-warrior/arcium-core/issues)
+- 🐛 **Issues**: [Report bugs](https://github.com/Hidden-Warriors/arcium-core/issues)
 
 ## Related Packages
 
