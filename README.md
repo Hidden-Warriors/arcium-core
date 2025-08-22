@@ -4,53 +4,53 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-> Privacy-focused computation framework for Solana using Arcium technology
+privacy-focused computation framework for solana using arcium technology
 
-## Overview
+## what it is
 
-`arcium-core` is a comprehensive TypeScript library that provides privacy-focused computation capabilities for Solana blockchain applications. It leverages Arcium's Multi-party Execution Environment (MXE) to enable secure, private computations while maintaining the decentralization benefits of blockchain technology.
+- npm package for private computation on solana
+- typescript library with full types
+- plug-and-play implementation of arcium tech
+- 21 tests + full docs
 
-## Key Features
+## what it does
 
-- 🔐 **Private Data Encryption**: Secure encryption of sensitive data using Rescue Cipher
-- 🏦 **MXE Integration**: Full integration with Arcium's Multi-party Execution Environment
-- 🔑 **Key Management**: Automatic key generation and exchange for secure communications
-- ⚡ **Account Derivation**: Automated derivation of all required Arcium account addresses
-- 🎮 **Game-Ready**: Specifically designed for gaming applications with private battles
-- 🛡️ **Type Safety**: Full TypeScript support with comprehensive type definitions
-- 🧪 **Testing Support**: Built-in utilities for testing and simulation
+- encrypts game character stats privately
+- handles secure key exchange automatically
+- works with existing solana programs
+- provides testing and simulation tools
 
-## Installation
+## install
 
 ```bash
 npm install arcium-core
 # or
-yarn add @hidden-warrior/arcium-core
+yarn add arcium-core
 # or
-pnpm add @hidden-warrior/arcium-core
+pnpm add arcium-core
 ```
 
-## Peer Dependencies
-
-This package requires the following peer dependencies:
+## you also need
 
 ```bash
 npm install @solana/web3.js @coral-xyz/anchor @arcium-hq/client
 ```
 
-## Quick Start
+these are the core solana libraries
 
-### Basic Usage
+## quick start
+
+### basic usage
 
 ```typescript
 import { prepareArciumBattle } from 'arcium-core';
 import { Program, AnchorProvider } from '@coral-xyz/anchor';
 
-// Initialize your Anchor program
+// set up your solana program
 const provider = new AnchorProvider(connection, wallet);
 const program = new Program(idl, programId, provider);
 
-// Prepare a private battle
+// prepare a private battle
 const result = await prepareArciumBattle(
   program,
   provider,
@@ -58,7 +58,7 @@ const result = await prepareArciumBattle(
   wallet.publicKey
 );
 
-// Use the result in your transaction
+// use it in your game
 const tx = await program.methods
   .battleWarrior(
     result.args.computationOffset,
@@ -70,7 +70,7 @@ const tx = await program.methods
   .transaction();
 ```
 
-### Manual Encryption
+### manual encryption
 
 ```typescript
 import {
@@ -90,13 +90,13 @@ const encryptedStats = encryptWarriorStats(
 );
 ```
 
-## API Reference
+## api reference
 
-### Core Functions
+### main functions
 
 #### `prepareArciumBattle`
 
-Main function for preparing private battles with complete Arcium integration.
+main function - does everything for you automatically
 
 ```typescript
 function prepareArciumBattle(
@@ -108,18 +108,18 @@ function prepareArciumBattle(
 ): Promise<ArciumPreparationResult>
 ```
 
-**Parameters:**
-- `program`: Anchor program instance
-- `provider`: Anchor provider
-- `warriorStats`: Warrior statistics to encrypt
-- `payerPubkey`: Public key of transaction payer
-- `config`: Optional configuration
+**what it needs:**
+- `program`: your solana program
+- `provider`: connection to solana
+- `warriorStats`: character stats to encrypt
+- `payerPubkey`: wallet address
+- `config`: optional settings
 
-**Returns:** `ArciumPreparationResult` with encrypted arguments and account addresses
+**what it returns:** ready-to-use encrypted battle data
 
 #### `getMXEPublicKeyWithRetry`
 
-Retrieves MXE public key with automatic retry logic.
+gets the arcium server key (with auto retry)
 
 ```typescript
 function getMXEPublicKeyWithRetry(
@@ -131,7 +131,7 @@ function getMXEPublicKeyWithRetry(
 
 #### `encryptWarriorStats`
 
-Encrypts warrior statistics for private computation.
+encrypts character stats manually
 
 ```typescript
 function encryptWarriorStats(
@@ -141,7 +141,7 @@ function encryptWarriorStats(
 ): Uint8Array
 ```
 
-### Types
+### types
 
 #### `WarriorStats`
 ```typescript
@@ -153,6 +153,8 @@ interface WarriorStats {
 }
 ```
 
+your character stats
+
 #### `ArciumPreparationResult`
 ```typescript
 interface ArciumPreparationResult {
@@ -160,6 +162,8 @@ interface ArciumPreparationResult {
   accounts: ArciumAccounts;
 }
 ```
+
+what you get back from prepareArciumBattle
 
 #### `ArciumConfig`
 ```typescript
@@ -170,9 +174,11 @@ interface ArciumConfig {
 }
 ```
 
-## Advanced Usage
+optional settings
 
-### Custom Configuration
+## advanced usage
+
+### custom settings
 
 ```typescript
 const config: ArciumConfig = {
@@ -190,7 +196,7 @@ const result = await prepareArciumBattle(
 );
 ```
 
-### Manual Account Derivation
+### manual account setup
 
 ```typescript
 import { deriveArciumAccounts, generateComputationOffset } from 'arcium-core';
@@ -199,7 +205,7 @@ const computationOffset = generateComputationOffset();
 const accounts = deriveArciumAccounts(programId, computationOffset);
 ```
 
-### Error Handling
+### error handling
 
 ```typescript
 import { ArciumError, ArciumErrorType } from 'arcium-core';
@@ -210,52 +216,52 @@ try {
   if (error instanceof ArciumError) {
     switch (error.type) {
       case ArciumErrorType.MXE_CONNECTION_FAILED:
-        console.error('MXE connection failed:', error.message);
+        console.error('connection failed:', error.message);
         break;
       case ArciumErrorType.ENCRYPTION_FAILED:
-        console.error('Encryption failed:', error.message);
+        console.error('encryption failed:', error.message);
         break;
-      // Handle other error types
+      // handle other errors
     }
   }
 }
 ```
 
-## Testing
+## testing
 
-The package includes utilities for testing and simulation:
+includes tools for testing your private battles:
 
 ```typescript
 import { simulateArciumBattleResult } from 'arcium-core';
 
-// Simulate battle result for testing
-const result = await simulateArciumBattleResult(85, 1000); // 1 second delay
+// test battle results without real blockchain
+const result = await simulateArciumBattleResult(85, 1000);
 console.log(result.outcome); // 'Victory', 'Defeat', or 'Draw'
 ```
 
-## Architecture
+## how it works inside
 
-### Core Components
+### core parts
 
-1. **Encryption Layer**: Handles Rescue Cipher encryption/decryption
-2. **MXE Integration**: Manages communication with Multi-party Execution Environment
-3. **Account Management**: Derives and manages all required blockchain accounts
-4. **Key Management**: Generates and exchanges cryptographic keys
-5. **Error Handling**: Comprehensive error handling with specific error types
+1. **encryption layer**: handles secure data encryption/decryption
+2. **mxe integration**: talks to arcium's private computation server
+3. **account management**: creates all needed solana accounts automatically
+4. **key management**: handles secure key exchange
+5. **error handling**: catches and explains what went wrong
 
-### Security Model
+### security
 
-- **Private Key Generation**: Uses cryptographically secure random number generation
-- **Key Exchange**: Implements x25519 elliptic curve Diffie-Hellman key exchange
-- **Data Encryption**: Uses Rescue Cipher for symmetric encryption
-- **Account Isolation**: Each computation uses unique accounts and offsets
+- **private keys**: generated using secure crypto methods
+- **key exchange**: uses x25519 elliptic curve (military grade)
+- **data encryption**: rescue cipher for symmetric encryption
+- **account isolation**: each battle gets unique accounts
 
-## Use Cases
+## what you can build
 
-### Gaming Applications
+### games with private battles
 
 ```typescript
-// Perfect for turn-based strategy games
+// turn-based games where stats are hidden
 const battleResult = await prepareArciumBattle(
   program,
   provider,
@@ -263,34 +269,34 @@ const battleResult = await prepareArciumBattle(
   playerPubkey
 );
 
-// Execute private battle
+// run private battle on blockchain
 const tx = await program.methods
   .executePrivateBattle(battleResult.args)
   .accounts(battleResult.accounts)
   .rpc();
 ```
 
-### NFT with Private Attributes
+### nfts with secret attributes
 
 ```typescript
-// NFTs with encrypted metadata
+// nfts where some traits are hidden
 const encryptedAttributes = encryptWarriorStats(
   nftAttributes,
   sharedSecret,
   nonce
 );
 
-// Mint NFT with private attributes
+// mint nft with private traits
 const mintResult = await program.methods
   .mintPrivateNFT(encryptedAttributes)
   .accounts(accounts)
   .rpc();
 ```
 
-### Prediction Markets
+### private predictions
 
 ```typescript
-// Private prediction outcomes
+// prediction markets with hidden votes
 const encryptedPrediction = encryptData(
   predictionData,
   sharedSecret,
@@ -298,106 +304,50 @@ const encryptedPrediction = encryptData(
 );
 ```
 
-## 🚀 Development & Release Process
+## development
 
-### 🛠️ Development Workflow
-
-This package uses GitHub Actions for automated testing and deployment:
-
-1. **Code Changes**: Make your changes and create a Pull Request
-2. **Automated Testing**: GitHub Actions runs tests on multiple Node.js versions
-3. **Code Quality**: ESLint, TypeScript, and security checks
-4. **Review Process**: PR reviewed and approved
-5. **Merge**: Changes merged to main branch
-
-### 📦 Creating Releases
-
-To create a new release:
-
-1. **Update version in package.json**
-2. **Update CHANGELOG.md** with release notes
-3. **Create and push a version tag**:
+### how to test
 
 ```bash
-# Create annotated tag
-git tag -a v1.0.0 -m "Release v1.0.0: Your release description"
-
-# Push tag to GitHub (triggers automatic release)
-git push origin v1.0.0
-```
-
-4. **GitHub Actions automatically**:
-   - ✅ Runs full test suite
-   - ✅ Builds package
-   - ✅ Creates GitHub Release
-   - ✅ Publishes to NPM (if NPM_TOKEN configured)
-
-### 🔧 CI/CD Features
-
-- **Multi-Node Testing**: Tests on Node.js 18, 20
-- **Security Scanning**: CodeQL analysis and dependency checks
-- **Automated Publishing**: NPM publish on release tags
-- **Dependency Updates**: Weekly dependency updates via Dependabot
-- **Release Automation**: Automatic changelog generation
-- **Issue Templates**: Standardized bug reports and feature requests
-
-### 🧪 Testing
-
-```bash
-# Run all tests
+# run all tests
 npm test
 
-# Run with coverage
+# run with coverage
 npm run test:coverage
 
-# Run specific test file
+# test specific file
 npm test -- tests/arcium-core.test.ts
 
-# Watch mode for development
+# watch mode
 npm run test:watch
 ```
 
-### 🔐 NPM Publishing Setup
+### creating releases
 
-To enable automated NPM publishing:
+1. **update version** in package.json
+2. **update changelog** with what changed
+3. **create git tag**:
 
-1. **Generate NPM token**: `npm token create`
-2. **Add to GitHub Secrets**: `NPM_TOKEN` in repository settings
-3. **GitHub Actions will automatically publish** on version tags
+```bash
+git tag -a v1.0.0 -m "Release v1.0.0: your changes"
+git push origin v1.0.0
+```
 
-## Contributing
+github actions will automatically:
+- run tests
+- build package
+- create release
+- publish to npm
 
-Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+### contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+want to help? check [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## License
+1. fork repo
+2. create feature branch
+3. make changes
+4. submit pull request
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## license
 
-## Support
-
-- 📧 **Email**: support@hiddenwarrior.fun
-- 💬 **Discord**: [Join our community](https://discord.gg/hiddenwarrior)
-- 📖 **Documentation**: [Full API docs](https://docs.hiddenwarrior.fun/arcium-core)
-- 🐛 **Issues**: [Report bugs](https://github.com/Hidden-Warriors/arcium-core/issues)
-
-## Related Packages
-
-- `@hidden-warrior/privacy-nft` - NFT with privacy features
-- `@hidden-warrior/battle-privacy` - Privacy-first battle system
-- `@hidden-warrior/ui` - UI components for privacy features
-
-## Acknowledgments
-
-- Built on top of [Arcium](https://arcium.com) technology
-- Inspired by privacy-preserving computation research
-- Designed for the Solana ecosystem
-
----
-
-**Made with ❤️ by the Hidden Warrior team**
+MIT - see [LICENSE](LICENSE) file
