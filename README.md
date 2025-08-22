@@ -298,6 +298,73 @@ const encryptedPrediction = encryptData(
 );
 ```
 
+## 🚀 Development & Release Process
+
+### 🛠️ Development Workflow
+
+This package uses GitHub Actions for automated testing and deployment:
+
+1. **Code Changes**: Make your changes and create a Pull Request
+2. **Automated Testing**: GitHub Actions runs tests on multiple Node.js versions
+3. **Code Quality**: ESLint, TypeScript, and security checks
+4. **Review Process**: PR reviewed and approved
+5. **Merge**: Changes merged to main branch
+
+### 📦 Creating Releases
+
+To create a new release:
+
+1. **Update version in package.json**
+2. **Update CHANGELOG.md** with release notes
+3. **Create and push a version tag**:
+
+```bash
+# Create annotated tag
+git tag -a v1.0.0 -m "Release v1.0.0: Your release description"
+
+# Push tag to GitHub (triggers automatic release)
+git push origin v1.0.0
+```
+
+4. **GitHub Actions automatically**:
+   - ✅ Runs full test suite
+   - ✅ Builds package
+   - ✅ Creates GitHub Release
+   - ✅ Publishes to NPM (if NPM_TOKEN configured)
+
+### 🔧 CI/CD Features
+
+- **Multi-Node Testing**: Tests on Node.js 18, 20
+- **Security Scanning**: CodeQL analysis and dependency checks
+- **Automated Publishing**: NPM publish on release tags
+- **Dependency Updates**: Weekly dependency updates via Dependabot
+- **Release Automation**: Automatic changelog generation
+- **Issue Templates**: Standardized bug reports and feature requests
+
+### 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run with coverage
+npm run test:coverage
+
+# Run specific test file
+npm test -- tests/arcium-core.test.ts
+
+# Watch mode for development
+npm run test:watch
+```
+
+### 🔐 NPM Publishing Setup
+
+To enable automated NPM publishing:
+
+1. **Generate NPM token**: `npm token create`
+2. **Add to GitHub Secrets**: `NPM_TOKEN` in repository settings
+3. **GitHub Actions will automatically publish** on version tags
+
 ## Contributing
 
 Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
