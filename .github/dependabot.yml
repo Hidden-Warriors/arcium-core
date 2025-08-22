@@ -1,0 +1,62 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "Hidden-Warriors/maintainers"
+    assignees:
+      - "Hidden-Warriors/maintainers"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"
+    groups:
+      # Group all non-major updates together
+      minor-and-patch:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group all development dependencies together
+      dev-dependencies:
+        dependency-type: "development"
+      # Group Solana ecosystem packages
+      solana-ecosystem:
+        patterns:
+          - "@solana/*"
+          - "@coral-xyz/*"
+          - "@arcium-hq/*"
+    ignore:
+      # Ignore major version updates for core dependencies
+      - dependency-name: "@solana/web3.js"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@coral-xyz/anchor"
+        update-types: ["version-update:semver-major"]
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "Hidden-Warriors/maintainers"
+    assignees:
+      - "Hidden-Warriors/maintainers"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "automated"

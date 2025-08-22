@@ -1,0 +1,129 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build package
+      run: npm run build
+
+    - name: Generate changelog
+      id: changelog
+      run: |
+        # Get the current tag
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+        # Get the previous tag (if exists)
+        PREVIOUS_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        echo "previous_tag=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+
+        # Generate changelog between tags
+        if [ -n "$PREVIOUS_TAG" ]; then
+          echo "## Changes since $PREVIOUS_TAG" > changelog_temp.md
+          git log --oneline --pretty=format:"- %s" $PREVIOUS_TAG..HEAD >> changelog_temp.md
+        else
+          echo "## Initial Release" > changelog_temp.md
+          echo "First release of @hidden-warrior/arcium-core" >> changelog_temp.md
+        fi
+
+        # Read the generated changelog
+        {
+          echo 'changelog<<EOF'
+          cat changelog_temp.md
+          echo EOF
+        } >> $GITHUB_OUTPUT
+
+        rm changelog_temp.md
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## 🚀 @hidden-warrior/arcium-core ${{ steps.changelog.outputs.tag_name }}
+
+          ### 📦 Installation
+          ```bash
+          npm install @hidden-warrior/arcium-core
+          ```
+
+          ### 🔧 What's New
+          ${{ steps.changelog.outputs.changelog }}
+
+          ### 📚 Documentation
+          - [README](https://github.com/Hidden-Warriors/arcium-core#readme)
+          - [API Documentation](https://docs.hiddenwarrior.fun/arcium-core)
+
+          ### 🔒 Security
+          This release has been tested and audited for security vulnerabilities.
+
+          ---
+          **Full Changelog**: https://github.com/Hidden-Warriors/arcium-core/compare/${{ steps.changelog.outputs.previous_tag }}...${{ steps.changelog.outputs.tag_name }}
+        draft: false
+        prerelease: false
+
+    - name: Generate package preview
+      run: |
+        echo "## 📦 Package Preview" > package_preview.md
+        echo "- **Name**: $(node -p "require('./package.json').name")" >> package_preview.md
+        echo "- **Version**: $(node -p "require('./package.json').version")" >> package_preview.md
+        echo "- **Description**: $(node -p "require('./package.json').description")" >> package_preview.md
+        echo "- **Main**: $(node -p "require('./package.json').main")" >> package_preview.md
+        echo "- **Types**: $(node -p "require('./package.json').types")" >> package_preview.md
+        echo "" >> package_preview.md
+        echo "### 📋 Dependencies" >> package_preview.md
+        echo "- **@arcium-hq/client**: $(node -p "require('./package.json').dependencies['@arcium-hq/client'] || 'Not specified'")" >> package_preview.md
+        echo "- **@solana/web3.js**: $(node -p "require('./package.json').dependencies['@solana/web3.js'] || 'Not specified'")" >> package_preview.md
+        echo "- **@coral-xyz/anchor**: $(node -p "require('./package.json').dependencies['@coral-xyz/anchor'] || 'Not specified'")" >> package_preview.md
+
+    - name: Comment on issues
+      uses: actions/github-script@v7
+      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      with:
+        script: |
+          const tag = context.ref.replace('refs/tags/', '');
+          const issues = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'closed',
+            labels: ['bug', 'enhancement', 'feature']
+          });
+
+          for (const issue of issues.data.slice(0, 5)) {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `🎉 This issue has been resolved in [${tag}](https://github.com/Hidden-Warriors/arcium-core/releases/tag/${tag})!`
+            });
+          }

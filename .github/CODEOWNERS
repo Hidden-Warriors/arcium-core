@@ -1,0 +1,22 @@
+# Code owners for @hidden-warrior/arcium-core
+# These owners will be automatically requested for review on PRs
+
+# Global owners
+* @Hidden-Warriors/maintainers
+
+# Core package files
+/package.json @Hidden-Warriors/maintainers
+/tsconfig.json @Hidden-Warriors/maintainers
+/src/ @Hidden-Warriors/maintainers
+
+# Documentation
+/README.md @Hidden-Warriors/maintainers
+/CHANGELOG.md @Hidden-Warriors/maintainers
+/CONTRIBUTING.md @Hidden-Warriors/maintainers
+
+# GitHub configuration
+/.github/ @Hidden-Warriors/maintainers
+
+# Tests
+/tests/ @Hidden-Warriors/maintainers
+/examples/ @Hidden-Warriors/maintainers
